@@ -439,14 +439,8 @@
       "__id__": 2
     },
     "_enabled": true,
-    "label": {
-      "__id__": 9
-    },
-    "jumpHeight": 0,
-    "jumpDuration": 0,
-    "maxMoveSpeed": 0,
-    "accel": 0,
-    "text": "Hello, World!",
+    "_m_Engine": null,
+    "_m_Response": null,
     "_id": "dcGJ+cSA5D7qNtScKfLjJJ"
   }
 ]
