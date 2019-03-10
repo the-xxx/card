@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "fc91be27-c273-4ca1-835f-f23665f7d9cd",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "dealer_gift_icon": {
+      "ver": "1.0.3",
+      "uuid": "08e94ca2-af1f-4736-8c23-94696b0f7e52",
+      "rawTextureUuid": "fc91be27-c273-4ca1-835f-f23665f7d9cd",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 49,
+      "height": 58,
+      "rawWidth": 49,
+      "rawHeight": 58,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

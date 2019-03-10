@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "44e0eade-7284-4e81-9e83-8b62f61b2231",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "com.tencent.plus.ic_success": {
+      "ver": "1.0.3",
+      "uuid": "461795ab-54af-492c-9022-98b26aa69c10",
+      "rawTextureUuid": "44e0eade-7284-4e81-9e83-8b62f61b2231",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 36,
+      "height": 36,
+      "rawWidth": 36,
+      "rawHeight": 36,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

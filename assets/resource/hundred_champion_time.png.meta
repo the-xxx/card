@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "77138ae9-b1a4-4ed0-869e-7fc12be0eca2",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "hundred_champion_time": {
+      "ver": "1.0.3",
+      "uuid": "a652d11c-0285-4d7e-a6f1-fb05eac09ac2",
+      "rawTextureUuid": "77138ae9-b1a4-4ed0-869e-7fc12be0eca2",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -4,
+      "offsetY": 2,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 52,
+      "height": 120,
+      "rawWidth": 64,
+      "rawHeight": 128,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "2170cb44-ff2a-4508-925c-5ee610ad45d7",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "10_charge_card_icon": {
+      "ver": "1.0.3",
+      "uuid": "9a7a83a1-c67f-4dfa-81a7-649f6b572a9a",
+      "rawTextureUuid": "2170cb44-ff2a-4508-925c-5ee610ad45d7",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 74,
+      "height": 46,
+      "rawWidth": 74,
+      "rawHeight": 46,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

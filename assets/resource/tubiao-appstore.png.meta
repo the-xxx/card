@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "99c87812-2c2f-4450-b443-60016508f030",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "tubiao-appstore": {
+      "ver": "1.0.3",
+      "uuid": "4be2ff8e-683c-4a4c-958c-9a34e428ad70",
+      "rawTextureUuid": "99c87812-2c2f-4450-b443-60016508f030",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 30,
+      "height": 30,
+      "rawWidth": 30,
+      "rawHeight": 30,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

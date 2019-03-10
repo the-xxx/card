@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "c3f4d59a-73d4-4359-ae2b-43bb39c1969b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "diamond_betting_pool_1": {
+      "ver": "1.0.3",
+      "uuid": "e1f97065-9055-44c1-9346-cf935207e10a",
+      "rawTextureUuid": "c3f4d59a-73d4-4359-ae2b-43bb39c1969b",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 148,
+      "height": 154,
+      "rawWidth": 148,
+      "rawHeight": 154,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

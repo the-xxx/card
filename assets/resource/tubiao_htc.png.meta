@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "a6d534c7-58a7-46fb-b62c-72c7d35fbaef",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "tubiao_htc": {
+      "ver": "1.0.3",
+      "uuid": "8fe25cff-adf1-4574-9a94-2439ed8805b7",
+      "rawTextureUuid": "a6d534c7-58a7-46fb-b62c-72c7d35fbaef",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 30,
+      "height": 30,
+      "rawWidth": 30,
+      "rawHeight": 30,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

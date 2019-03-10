@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "8162ee1b-e246-4abd-a396-7994134276e8",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "TreasureChestAnimation_0001": {
+      "ver": "1.0.3",
+      "uuid": "889f5b67-628a-4e39-8c9d-e962ba98b982",
+      "rawTextureUuid": "8162ee1b-e246-4abd-a396-7994134276e8",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 5,
+      "offsetY": 20.5,
+      "trimX": 76,
+      "trimY": 46,
+      "width": 88,
+      "height": 97,
+      "rawWidth": 230,
+      "rawHeight": 230,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

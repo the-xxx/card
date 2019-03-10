@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "a3e9704a-5405-4d7d-a79b-a4e7edfbbd68",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "puzzle_coin": {
+      "ver": "1.0.3",
+      "uuid": "5cda161d-317c-4151-ba54-2b8c60bca6c6",
+      "rawTextureUuid": "a3e9704a-5405-4d7d-a79b-a4e7edfbbd68",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": -44.5,
+      "offsetY": 44.5,
+      "trimX": 2,
+      "trimY": 2,
+      "width": 931,
+      "height": 931,
+      "rawWidth": 1024,
+      "rawHeight": 1024,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
