@@ -1,5 +1,5 @@
-var Engine = require("./network/packetsend");
-var Rsp = require("./network/oncommand");
+var Socket = require("./network/socket");
+
 cc.Class({
     extends: cc.Component,
 
@@ -10,13 +10,12 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
-        this._m_Engine=new Engine()
-        this._m_Response=new Rsp()
-        let engine = new MatchvsEngine()
-        let response = new MatchvsResponse()
+        window.Net = new Socket()
+        var engine = new MatchvsEngine()
+        var response = new MatchvsResponse()
         engine.init(response,"Matchvs","alpha",215155,"51965001f3444a05bbac214c7ee984a7#C");
-        this._m_Engine.init(engine)
-        this._m_Response.init(response)
+        window.Net.initEngine(engine)
+        window.Net.initRsp(response)
     },
 
 });

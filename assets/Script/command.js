@@ -4,7 +4,7 @@
 */
 cc.Class({
 
-    oncommand:function(idx,len,data){
+    oncommand:function(idx){
         switch (idx) {
             case 0:               
                 break;
