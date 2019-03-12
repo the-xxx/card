@@ -49,7 +49,8 @@ cc.Class({
     },
 
     gameServerNotify:function(rspData){
-        this._m_RspData=JSON.parse(rspData)
+        this._m_RspData=rspData
+        console.log(rspData,typeof(rspData))
         this._m_RspLen=this._m_RspData.cpProto.len
         let idx=this._m_RspData.cpProto.head  
         commond.oncommand(idx)
@@ -66,29 +67,28 @@ cc.Class({
 
     packetString:function(str){
         this._m_PacketIdx++
-        this._m_PacketData[this._m_PacketIdx]=str
+        this._m_PacketData[this._m_PacketIdx.toString()]=str
     },
 
     packetInt:function(int){
         this._m_PacketIdx++
-        this._m_PacketData[this._m_PacketIdx]=int
+        this._m_PacketData[this._m_PacketIdx.toString()]=int
     },
 
     packetObject:function(obj){
         this._m_PacketIdx++
-        this._m_PacketData[this._m_PacketIdx]=JSON.stringify(obj)
+        this._m_PacketData[this._m_PacketIdx.toString()]=JSON.stringify(obj)
     },
 
     packetArray:function(array){
         this._m_PacketIdx++
-        this._m_PacketData[this._m_PacketIdx]=array
+        this._m_PacketData[this._m_PacketIdx.toString()]=array
     },
 
     packetSend:function(){
         this._m_PacketData.len=this._m_PacketIdx
         let send=JSON.stringify(this._m_PacketData)
-        console.log("发送数据："+typeof(send))
-        let retObj=this._m_Engine.sendEventEx(1,JSON.stringify(this._m_PacketData),0)
+        let retObj=this._m_Engine.sendEventEx(1,send,0)
         if(retObj.result==0){
             console.log("发送成功！！")
             this._m_PacketIdx=0
