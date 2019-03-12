@@ -1,0 +1,14 @@
+//前提：ssh-keys已经绑定，否则一下操作均需加上账号密码
+
+//检出项目
+git clone address	把address（目标的地址）检出出来
+
+//提交三部曲
+git add *	添加所有本地修改
+
+git commit -m "这里写提交日志"	把本地的修改提交到本地master分支（并未送到github远程仓库，仍然存在本地）
+
+git push	把本地master分支的改动同步到远程仓库（真正同步到github了）
+
+//更新内容
+git pull	更新远程仓库最新版内容到本地
