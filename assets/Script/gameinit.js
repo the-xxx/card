@@ -7,7 +7,7 @@ cc.Class({
         console.log("网络的对象",+Net.g_Socket)
         Net.preparePacket(0)
         Net.packetInt(1)
-        // Net.packetString("this is test player")
+        Net.packetString("this is test player")
         Net.packetSend()
     },
 
