@@ -1,10 +1,11 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.0",
   "uuid": "75e6a7f4-46d4-4408-ac91-0c5ea4c11377",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "platformSettings": {},
   "subMetas": {
     "card_small_symbol_number_black_A": {
       "ver": "1.0.3",

@@ -1,10 +1,11 @@
 {
-  "ver": "2.2.0",
+  "ver": "2.3.0",
   "uuid": "71c0e0d8-db2e-4fed-a992-5bc5b0bf4f66",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
+  "platformSettings": {},
   "subMetas": {
     "card_small_symbol_big_heart_Q": {
       "ver": "1.0.3",

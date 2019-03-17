@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "5f705934-2179-4dd4-8c5a-ee606bfa3883",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "card_symbol_fangkuai": {
+      "ver": "1.0.3",
+      "uuid": "a2652d7b-ca69-44b7-890f-18175c8113fb",
+      "rawTextureUuid": "5f705934-2179-4dd4-8c5a-ee606bfa3883",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 15,
+      "height": 17,
+      "rawWidth": 15,
+      "rawHeight": 17,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
