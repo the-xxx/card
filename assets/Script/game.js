@@ -56,9 +56,29 @@ cc.Class({
         this.cardList = [];
         for ( let pos in this.posList){
             let newCard = this.createCard();
-            newCard.setPosition(0, this.posList[pos]);
+            // newCard.setPosition(0, this.posList[pos]);
             this.cardList.push(newCard);
+            this.playAction(newCard, this.posList[pos]);
         }
+    },
+
+    playAction: function(oCard, numPos){
+        oCard.stopAllActions();
+        let numTime = 2;
+
+        oCard.setPosition(0, 0);
+        // let actionMove = cc.moveTo(numTime, 0, numPos);
+        let randomPosY = Math.random()*300;
+        let besier = [cc.v2(0,0),cc.v2(300-randomPosY,randomPosY),cc.v2(0,numPos)];
+        let actionMove = cc.bezierTo(numTime, besier);
+        oCard.setScale(0.3);
+        let actionScale = cc.scaleTo(numTime, 1);
+        let actionRotate = cc.rotateTo(numTime, 7200);
+
+        let actionSpawn = cc.spawn(actionMove, actionScale, actionRotate);
+        actionSpawn.easing(cc.easeIn(3.0));
+
+        oCard.runAction(actionSpawn);
     },
 
     /*
@@ -66,7 +86,6 @@ cc.Class({
     */
     checkKey: function(cardInfo1, cardInfo2, sKey){
         var val = 0;
-        cc.log(cardInfo1[sKey],cardInfo2[sKey]);
         if (cardInfo1[sKey]){
             val |= 1;
         }
@@ -97,14 +116,17 @@ cc.Class({
     doCompareCard: function(oCard1, oCard2){
         let cardInfo1 = oCard1.instance.getCompareInfo();
         let cardInfo2 = oCard2.instance.getCompareInfo();
+        cc.log("------------------------");
         cc.log(">>>>>cardInfo1");
         for(let i in cardInfo1){
             cc.log(i,cardInfo1[i]);
         }
+        cc.log("------------------------");
         cc.log(">>>>>cardInfo2");
         for(let i in cardInfo2){
             cc.log(i,cardInfo2[i]);
         }
+        cc.log("------------------------");
 
         // "TripleKill"
         // "DoubleKill"
