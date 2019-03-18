@@ -9,7 +9,7 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 cc.Class({
-    extends: cc.Component,
+    extends: require("base").CBase, // 组件基类，以后按钮都用这个，自动调用onMessage方法
 
     properties: {
         cardPrefab:{
@@ -26,11 +26,12 @@ cc.Class({
         },
     },
 
-    createCard: function(){
+    createCard: function(pos){
         // get residx for random
         let cardIdx1 = Math.round(Math.random()*3) * 100 + Math.round(Math.random() * 12);
         let cardIdx2 = Math.round(Math.random()*3) * 100 + Math.round(Math.random() * 12);
         let cardIdx3 = Math.round(Math.random()*3) * 100 + Math.round(Math.random() * 12);
+        let direction = Math.round(Math.round(pos * 8 / this.posList.length));
         let newCard;
         if (this.cardCache.length == 0) {
             newCard = cc.instantiate(this.cardPrefab);
@@ -41,7 +42,7 @@ cc.Class({
             newCard = this.cardCache.pop();
             newCard.active = true;
         }
-        newCard.instance.initCardGroup(cardIdx1, cardIdx2, cardIdx3);
+        newCard.instance.initCardGroup(cardIdx1, cardIdx2, cardIdx3, direction);
         return newCard;
     },
 
@@ -54,25 +55,25 @@ cc.Class({
             }
         }
         this.cardList = [];
-        for ( let pos in this.posList){
-            let newCard = this.createCard();
-            // newCard.setPosition(0, this.posList[pos]);
+        for (let pos in this.posList){
+            let newCard = this.createCard(pos);
             this.cardList.push(newCard);
             this.playAction(newCard, this.posList[pos]);
         }
     },
 
-    playAction: function(oCard, numPos){
+    playAction: function(oCard, lstPos){
         oCard.stopAllActions();
         let numTime = 2;
 
         oCard.setPosition(0, 0);
         // let actionMove = cc.moveTo(numTime, 0, numPos);
         let randomPosY = Math.random()*300;
-        let besier = [cc.v2(0,0),cc.v2(300-randomPosY,randomPosY),cc.v2(0,numPos)];
+        let besier = [cc.v2(0,0),cc.v2(300-randomPosY,randomPosY),cc.v2(lstPos[0]*2,lstPos[1])];
         let actionMove = cc.bezierTo(numTime, besier);
+        let oldScale = oCard.scale;
         oCard.setScale(0.3);
-        let actionScale = cc.scaleTo(numTime, 1);
+        let actionScale = cc.scaleTo(numTime, oldScale);
         let actionRotate = cc.rotateTo(numTime, 7200);
 
         let actionSpawn = cc.spawn(actionMove, actionScale, actionRotate);
@@ -184,24 +185,54 @@ cc.Class({
 
     // LIFE-CYCLE CALLBACKS:
 
+    onMessage: function(event, msg){
+        cc.log(event, msg, '+++++++++++++++++++++++++++');
+        if (msg == "deal") {
+            this.gamebegin();
+            let label = this.dealbutton.node.getChildByName("label").getComponent(cc.Label);
+            if (label.string == "开始"){
+                label.string = "跟";
+            }
+            else{
+                label.string = "开始";
+            }
+        }
+        else if (msg == "compare") {
+            if (this.cardList.length >= 2){
+                let val = this.doCompareCard(this.cardList[0], this.cardList[1]);
+                cc.log("结果",val);
+                let delKey = (val==1)?1:0;
+                this.cardCache.push(this.cardList[delKey]);
+                this.cardList[delKey].active = false;
+                this.cardList.splice(delKey, 1);
+            }
+        }
+        else if (msg == "look") {
+            if (this.cardList.length){
+                this.cardList[0].instance.lookCard();
+            }
+        }
+    },
+
     onLoad () {
         this.cardList = [];
         this.cardCache = [];
-        this.posList = [-169,169];
+        let num = 169;
+        this.posList = [[0,-num],[num,-num],[num,0],[num,num],[0,num],[-num,num],[-num,0],[-num,-num]];
 
-        let clickEventHandler = new cc.Component.EventHandler();
-        clickEventHandler.target = this.node;
-        clickEventHandler.component = "game";
-        clickEventHandler.handler = "callback";
-        clickEventHandler.customEventData = "dealbutton";
-        this.dealbutton.clickEvents.push(clickEventHandler);
+        // let clickEventHandler = new cc.Component.EventHandler();
+        // clickEventHandler.target = this.node;
+        // clickEventHandler.component = "game";
+        // clickEventHandler.handler = "callback";
+        // clickEventHandler.customEventData = "dealbutton";
+        // this.dealbutton.clickEvents.push(clickEventHandler);
 
-        let clickEventHandler2 = new cc.Component.EventHandler();
-        clickEventHandler2.target = this.node;
-        clickEventHandler2.component = "game";
-        clickEventHandler2.handler = "callback";
-        clickEventHandler2.customEventData = "comparebutton";
-        this.comparebutton.clickEvents.push(clickEventHandler2);
+        // let clickEventHandler2 = new cc.Component.EventHandler();
+        // clickEventHandler2.target = this.node;
+        // clickEventHandler2.component = "game";
+        // clickEventHandler2.handler = "callback";
+        // clickEventHandler2.customEventData = "comparebutton";
+        // this.comparebutton.clickEvents.push(clickEventHandler2);
     },
 
     start () {

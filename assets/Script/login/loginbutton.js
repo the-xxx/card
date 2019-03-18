@@ -9,27 +9,20 @@
 //  - [English] http://www.cocos2d-x.org/docs/creator/en/scripting/life-cycle-callbacks.html
 
 cc.Class({
-    extends: cc.Component,
+    extends: require("base").CBase, // 组件基类，以后按钮都用这个，自动调用onMessage方法
 
     properties: {
     },
 
+    // LIFE-CYCLE CALLBACKS:
+
     onMessage: function(event, msg){
-        if (event.target.instance != undefined) {
-            cc.log("onMessage!", event.target.instance.name, msg);
-            event.target.instance.onMessage();
-        }
-        else{
-            cc.log("onMessage! no target node");
-            let nodeGame = cc.find("Canvas/game");
-            cc.log(nodeGame);
-            if (nodeGame){
-                nodeGame.instance.onMessage(event, msg);
-            }
+        cc.director.loadScene("play");  // 加载场景【play】
+        moduleLogin = require("login"); // 获取脚本【login.js】
+        if (moduleLogin){
+            moduleLogin.DoLogin();  // 如果脚本存在，则调用【DoLogin】函数
         }
     },
-
-    // LIFE-CYCLE CALLBACKS:
 
     // onLoad () {},
 

@@ -41,7 +41,7 @@ cc.Class({
     /*
     * 初始化牌组
     */
-    initCardGroup: function(cardIdx1, cardIdx2, cardIdx3){
+    initCardGroup: function(cardIdx1, cardIdx2, cardIdx3, direction){
         this.cardInfo = [cardIdx1,cardIdx2,cardIdx3];
         this.cardInfo.sort(
             function(a, b){
@@ -55,6 +55,35 @@ cc.Class({
         this.loadCard(this.node1, this.cardInfo[0]);
         this.loadCard(this.node2, this.cardInfo[1]);
         this.loadCard(this.node3, this.cardInfo[2]);
+        this.loadFuckButton(direction);
+        if (direction != 0){
+            this.node.setScale(0.5);
+        }
+        else{
+            this.node.setScale(1);
+        }
+    },
+
+    loadFuckButton: function(direction){
+        if (direction == 0){
+            return;
+        }
+        let [numX, numY] = this.directionList[direction];
+        let sPath = "button2/btnboom";
+        let self = this;
+        cc.loader.loadRes(sPath, cc.SpriteFrame, function(err, spriteFrame){
+            let node = self.node.getChildByName("fuck");
+            if (node){
+                node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                return
+            }
+            node = new cc.Node("fuck");
+            let sprite = node.addComponent(cc.Sprite);
+            sprite.spriteFrame = spriteFrame;
+            self.node.addChild(node, -1);
+            node.setPosition(numX*100, numY*100);
+            node.setScale(2);
+        });
     },
 
     /*
@@ -107,6 +136,21 @@ cc.Class({
             sprite.spriteFrame = spriteFrame;
             cardNode.addChild(node);
             node.setPosition(0, 50);
+        });
+
+        let idxBg = Math.round(Math.random()*3);
+        sPath = "card/cover_"+this.typeKey[idxBg];
+        cc.loader.loadRes(sPath, cc.SpriteFrame, function(err, spriteFrame){
+            let node = cardNode.getChildByName("cover");
+            if (node){
+                node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                return
+            }
+            node = new cc.Node("cover");
+            let sprite = node.addComponent(cc.Sprite);
+            sprite.spriteFrame = spriteFrame;
+            cardNode.addChild(node, 999);
+            node.setPosition(0, 0);
         });
     },
 
@@ -170,12 +214,29 @@ cc.Class({
         return this.cardCompareInfo;
     },
 
+    lookCard: function(){
+        let node;
+        node = this.node1.getChildByName("cover");
+        if (node){
+            node.destroy();
+        }
+        node = this.node2.getChildByName("cover");
+        if (node){
+            node.destroy();
+        }
+        node = this.node3.getChildByName("cover");
+        if (node){
+            node.destroy();
+        }
+    },
+
     // LIFE-CYCLE CALLBACKS:
 
     onLoad () {
         this.colorKey = ['red','black','red','black'];
         this.typeKey = ['hongtao','heitao','fangkuai','meihua'];
         this.valueKey = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
+        this.directionList = [[0,0],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,-1]];
         this.cardInfo = [];
         this.cardCompareInfo = {};
     },
