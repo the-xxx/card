@@ -18,10 +18,10 @@ cc.Class({
 
     onMessage: function(event, msg){
         cc.director.loadScene("play");  // 加载场景【play】
-        moduleLogin = require("login"); // 获取脚本【login.js】
-        if (moduleLogin){
-            moduleLogin.DoLogin();  // 如果脚本存在，则调用【DoLogin】函数
-        }
+        // moduleLogin = require("login"); // 获取脚本【login.js】
+        // if (moduleLogin){
+        //     moduleLogin.DoLogin();  // 如果脚本存在，则调用【DoLogin】函数
+        // }
     },
 
     // onLoad () {},

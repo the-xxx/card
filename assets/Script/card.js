@@ -51,11 +51,13 @@ cc.Class({
                 return a%100 - b%100;
             }
         );
+        this.direction = direction;
         this.cardCompareInfo = {};
         this.loadCard(this.node1, this.cardInfo[0]);
         this.loadCard(this.node2, this.cardInfo[1]);
         this.loadCard(this.node3, this.cardInfo[2]);
         this.loadFuckButton(direction);
+        this.loadHide();
         if (direction != 0){
             this.node.setScale(0.5);
         }
@@ -64,25 +66,52 @@ cc.Class({
         }
     },
 
+    loadHide: function(direction){
+
+        let sPath = "button/btnhide";
+        let self = this;
+        cc.loader.loadRes(sPath, cc.SpriteFrame, function(err, spriteFrame){
+            let node = self.node.getChildByName("hide");
+            if (node){
+                node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                node.active = false;
+                return
+            }
+            node = new cc.Node("hide");
+            let sprite = node.addComponent(cc.Sprite);
+            sprite.spriteFrame = spriteFrame;
+            self.node.addChild(node, 999);
+            node.setPosition(0, 0);
+            node.setScale(2);
+            node.opacity = 150;
+            node.active = false;
+        });
+    },
+
     loadFuckButton: function(direction){
-        if (direction == 0){
-            return;
-        }
-        let [numX, numY] = this.directionList[direction];
         let sPath = "button2/btnboom";
         let self = this;
         cc.loader.loadRes(sPath, cc.SpriteFrame, function(err, spriteFrame){
-            let node = self.node.getChildByName("fuck");
+            let node = self.node.getChildByName(self.node.name);
             if (node){
                 node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+                node.active = (direction != 0 && true);
                 return
             }
-            node = new cc.Node("fuck");
+            node = new cc.Node(self.node.name);
+            node.active = (direction != 0 && true);
             let sprite = node.addComponent(cc.Sprite);
             sprite.spriteFrame = spriteFrame;
             self.node.addChild(node, -1);
-            node.setPosition(numX*100, numY*100);
+            node.setPosition(0, 100);
             node.setScale(2);
+            let button = node.addComponent(cc.Button);
+            let eventHandler = new cc.Component.EventHandler();
+            eventHandler.target = cc.find("Canvas/evention");
+            eventHandler.component = "evention";
+            eventHandler.handler = "onMessage";
+            eventHandler.customEventData = "zzz";
+            button.clickEvents.push(eventHandler);
         });
     },
 
@@ -214,7 +243,7 @@ cc.Class({
         return this.cardCompareInfo;
     },
 
-    lookCard: function(){
+    lookCard: function(numIgnor=0){
         let node;
         node = this.node1.getChildByName("cover");
         if (node){
@@ -228,6 +257,14 @@ cc.Class({
         if (node){
             node.destroy();
         }
+        node = this.node.getChildByName(this.node.name);
+        if (node){
+            node.active = false;
+        }
+        node = this.node.getChildByName("hide");
+        if (node && this.direction != numIgnor){
+            node.active = true;
+        }
     },
 
     // LIFE-CYCLE CALLBACKS:
@@ -236,9 +273,10 @@ cc.Class({
         this.colorKey = ['red','black','red','black'];
         this.typeKey = ['hongtao','heitao','fangkuai','meihua'];
         this.valueKey = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
-        this.directionList = [[0,0],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,-1]];
+        // this.directionList = [[0,0],[1,1],[1,0],[1,-1],[0,-1],[-1,-1],[-1,0],[-1,-1]];
         this.cardInfo = [];
         this.cardCompareInfo = {};
+        this.direction = -1;
     },
 
     start () {

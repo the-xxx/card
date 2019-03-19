@@ -17,10 +17,10 @@ cc.Class({
     onMessage: function(event, msg){
         if (event.target.instance != undefined) {
             cc.log("onMessage!", event.target.instance.name, msg);
-            event.target.instance.onMessage();
+            event.target.instance.onMessage(event, msg);
         }
         else{
-            cc.log("onMessage! no target node");
+            cc.log("onMessage! no target node", event.target.name);
             let nodeGame = cc.find("Canvas/game");
             cc.log(nodeGame);
             if (nodeGame){

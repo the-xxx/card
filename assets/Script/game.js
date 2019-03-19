@@ -37,6 +37,7 @@ cc.Class({
             newCard = cc.instantiate(this.cardPrefab);
             this.node.addChild(newCard);
             newCard.instance.game = this;
+            newCard.name = "objCard" + pos.toString();
         }
         else{
             newCard = this.cardCache.pop();
@@ -183,10 +184,20 @@ cc.Class({
         }
     },
 
+    onOpen: function(numIgnor=0){
+        for (let idx in this.cardList){
+            this.cardList[idx].instance.lookCard(numIgnor);
+            if (this.cardList[idx].instance.direction != 0) {
+                this.cardList[idx].setScale(0.8);
+            }
+        }
+    },
+
     // LIFE-CYCLE CALLBACKS:
 
     onMessage: function(event, msg){
         cc.log(event, msg, '+++++++++++++++++++++++++++');
+        cc.log(event.target.name, event.target.name.match("objCard"), '**');
         if (msg == "deal") {
             this.gamebegin();
             let label = this.dealbutton.node.getChildByName("label").getComponent(cc.Label);
@@ -198,18 +209,36 @@ cc.Class({
             }
         }
         else if (msg == "compare") {
-            if (this.cardList.length >= 2){
-                let val = this.doCompareCard(this.cardList[0], this.cardList[1]);
-                cc.log("结果",val);
-                let delKey = (val==1)?1:0;
-                this.cardCache.push(this.cardList[delKey]);
-                this.cardList[delKey].active = false;
-                this.cardList.splice(delKey, 1);
-            }
+            this.onOpen();
         }
         else if (msg == "look") {
             if (this.cardList.length){
                 this.cardList[0].instance.lookCard();
+            }
+        }
+        else if (event.target.name.match("objCard")){
+            let idx = this.cardList.indexOf(event.target.parent);
+            cc.log(idx,'---', this.cardList.length);
+            if (idx != -1 && idx != 0){
+                let val = this.doCompareCard(this.cardList[0], this.cardList[idx]);
+                cc.log("结果",val);
+                let delKey = (val==1)?idx:0;
+                let oCard = this.cardList[delKey];
+                let oWinCard = this.cardList[idx-delKey];
+                this.cardCache.push(oCard);
+                this.cardList.splice(delKey, 1);
+                // oCard.active = false;
+                oCard.instance.lookCard(-1);
+                if (delKey != 0) {
+                    oCard.setScale(0.8);
+                }
+                cc.log(delKey,delKey==0,'11111111111111111');
+
+                if (delKey == 0){
+                    cc.log('2222222222222',oWinCard.instance.direction);
+                    this.onOpen(oWinCard.instance.direction);
+                    // cc.director.loadScene("login");
+                }
             }
         }
     },
@@ -217,7 +246,7 @@ cc.Class({
     onLoad () {
         this.cardList = [];
         this.cardCache = [];
-        let num = 169;
+        let num = 180;
         this.posList = [[0,-num],[num,-num],[num,0],[num,num],[0,num],[-num,num],[-num,0],[-num,-num]];
 
         // let clickEventHandler = new cc.Component.EventHandler();
