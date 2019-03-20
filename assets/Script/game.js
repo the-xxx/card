@@ -24,6 +24,10 @@ cc.Class({
             default: null,
             type: cc.Button
         },
+        goldlabel: {
+            default: null,
+            type: cc.Label
+        },
     },
 
     createCard: function(pos){
@@ -80,10 +84,15 @@ cc.Class({
         let actionSpawn = cc.spawn(actionMove, actionScale, actionRotate);
         actionSpawn.easing(cc.easeIn(3.0));
 
-        oCard.runAction(actionSpawn);
+        let actionCall = cc.callFunc(()=>{oCard.instance.onActionEnd()});
+
+        let actionSequence = cc.sequence(actionSpawn, actionCall);
+
+        oCard.runAction(actionSequence);
     },
 
     /*
+    * 针对某种牌，确定开牌双方拥有情况
     * 0-都没有 1-仅1有 2-仅2有 3-都有
     */
     checkKey: function(cardInfo1, cardInfo2, sKey){
@@ -199,21 +208,33 @@ cc.Class({
         cc.log(event, msg, '+++++++++++++++++++++++++++');
         cc.log(event.target.name, event.target.name.match("objCard"), '**');
         if (msg == "deal") {
-            this.gamebegin();
             let label = this.dealbutton.node.getChildByName("label").getComponent(cc.Label);
             if (label.string == "开始"){
+                this.gamebegin();
                 label.string = "跟";
+                
+                this.operationForGoldLabel(3, 10);
+                this.operationForGoldLabel(4, 10);
+                this.operationForGoldLabel(5, 80);
             }
-            else{
-                label.string = "开始";
+            else if (label.string == "跟"){
+                let [goldAll, goldBase, goldYour] = this.operationForGoldLabel(0);
+                this.operationForGoldLabel(3, goldBase>goldYour?goldBase:goldYour);
+                this.operationForGoldLabel(4, goldBase>goldYour?goldBase:goldYour);
+                this.operationForGoldLabel(5, goldAll+goldYour);
             }
         }
         else if (msg == "compare") {
             this.onOpen();
+            let label = this.dealbutton.node.getChildByName("label").getComponent(cc.Label);
+            label.string = "开始";
         }
         else if (msg == "look") {
             if (this.cardList.length){
                 this.cardList[0].instance.lookCard();
+                let [goldAll, goldBase, goldYour] = this.operationForGoldLabel(0);
+                this.operationForGoldLabel(3, goldYour*2);
+                this.operationForGoldLabel(4, goldBase*2);
             }
         }
         else if (event.target.name.match("objCard")){
@@ -232,15 +253,63 @@ cc.Class({
                 if (delKey != 0) {
                     oCard.setScale(0.8);
                 }
-                cc.log(delKey,delKey==0,'11111111111111111');
 
                 if (delKey == 0){
-                    cc.log('2222222222222',oWinCard.instance.direction);
                     this.onOpen(oWinCard.instance.direction);
                     // cc.director.loadScene("login");
                 }
             }
         }
+        else if ( event.target.name == "addbutton"){
+            cc.log("抬价");
+            this.operationForGoldLabel(1);
+        }
+        else if ( event.target.name == "cutbutton"){
+            cc.log("减价");
+            this.operationForGoldLabel(2);
+        }
+    },
+
+    /**
+     * 对金币文本操作
+     * numOP: 0-获取数值 1-加出价 2-减出价 3-改出价 4-改底价 5-改奖池
+     * numVal：改变值
+     */
+    operationForGoldLabel: function(numOP, numVal=0){
+        let label = this.goldlabel.getComponent(cc.Label);
+        let labelStr = label.string;
+        let lstStr = labelStr.split(/[:\n]/ig);
+
+        switch(numOP){
+            case 0: {
+                return [Number(lstStr[1]),Number(lstStr[3]),Number(lstStr[5])];
+            }
+            case 1: {
+                lstStr[5] = Math.round(Number(lstStr[5])+Number(lstStr[3])/2.0).toString();
+                break;
+            }
+            case 2: {
+                let numVal = Math.round(Number(lstStr[5])-Number(lstStr[3])/2.0);
+                lstStr[5] = (Number(lstStr[3])>numVal?Number(lstStr[3]):numVal).toString();
+                break;
+            }
+            case 3: {
+                lstStr[5] = numVal.toString();
+                break;
+            }
+            case 4: {
+                lstStr[3] = numVal.toString();
+                break;
+            }
+            case 5: {
+                lstStr[1] = numVal.toString();
+                break;
+            }
+        }
+
+        label.string = "{0}:{1}\n{2}:{3}\n{4}:{5}".replace(/\{(\w+)\}/g, function(k,v){
+            return lstStr[v];
+        });
     },
 
     onLoad () {

@@ -95,11 +95,13 @@ cc.Class({
             let node = self.node.getChildByName(self.node.name);
             if (node){
                 node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
-                node.active = (direction != 0 && true);
+                node.active = false;
+                // node.active = (direction != 0 && true);
                 return
             }
             node = new cc.Node(self.node.name);
-            node.active = (direction != 0 && true);
+            // node.active = (direction != 0 && true);
+            node.active = false;
             let sprite = node.addComponent(cc.Sprite);
             sprite.spriteFrame = spriteFrame;
             self.node.addChild(node, -1);
@@ -264,6 +266,13 @@ cc.Class({
         node = this.node.getChildByName("hide");
         if (node && this.direction != numIgnor){
             node.active = true;
+        }
+    },
+
+    onActionEnd: function(){
+        let node = this.node.getChildByName(this.node.name);
+        if (node){
+            node.active = (this.direction != 0);
         }
     },
 
